@@ -3,6 +3,9 @@ const path = require('path');
 const express = require('express');
 const app = express();
 
+app.set('view engine', 'pug');
+app.set('views', 'views'); // not needed as is this by default
+
 // allows to parse video
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: false}));
@@ -11,14 +14,14 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Add routes
-adminRoutes = require('./routes/admin');
-app.use('/admin', adminRoutes);
+adminData = require('./routes/admin');
+app.use('/admin', adminData.routes);
 
 shopRoutes = require('./routes/shop');
 app.use(shopRoutes);
 
 app.use((req, res, next) => {
-    res.status(404).sendFile(path.join(__dirname, 'views', '404.html'));
+    res.status(404).render('404', {docTitle: 'Page Not Found'});
 })
 
 const server = http.createServer(app);
