@@ -5,9 +5,9 @@ const app = express();
 
 const expressHbs = require('express-handlebars');
 
-app.engine('hbs', expressHbs);
-// app.set('view engine', 'pug');
-app.set('view engine', 'hbs');
+// app.engine('hbs', expressHbs);
+app.set('view engine', 'pug');
+// app.set('view engine', 'hbs');
 app.set('views', 'views'); // not needed as is this by default
 
 // allows to parse video
